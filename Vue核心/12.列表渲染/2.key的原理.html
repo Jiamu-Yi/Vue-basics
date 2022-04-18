@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div  id="root">
+    <button @click.once="add" >tianjia</button>
+    <ul>
+        <!--        遍历数组(常用)-->
+        <li v-for="(p,index) in persons" :key="p.id">
+            {{p.name}} -  {{p.age}}
+            <input>
+        </li>
+
+    </ul>
+</div>
+<!--
+        vue中的key有什么作用，key是对象的标识，根据key去对比真实DOM和虚拟DOM的区别，如果改变了就更像，没有改变就保持，
+        用index作为KEY的问题，如果结构发生改变，则可能会出现问题，并且效率较低
+-->
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const  vm = new Vue({
+        el:'#root',
+        data:{
+            persons:[
+                {id:'001',name:'张三',age:'18'},
+                {id:'002',name:'李四',age:'18'},
+                {id:'003',name:'王五',age:'18'},
+            ],
+        },
+        methods:{
+            add(){
+                const p = {id:'004',name:'yjm',age:'16'};
+                this.persons.unshift(p);
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

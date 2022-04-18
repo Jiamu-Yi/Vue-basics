@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    姓：<input type="text" v-model="first_name">
+    </br>
+    名：<input type="text" v-model="family_name">
+    </br>
+    姓名：<span>{{fullName}}</span>
+</div>
+<!--computed能完成的，watch都可以完成，例如watch可以进行异步
+    被Vue管理的函数，最好写普通函数，这样可以保证this指向的是vm，或组件实例对象、
+    所有不被Vue管理的函数，（定时器，Ajax，promise），最好写成箭头，这样this指向vm，或组件实例对象
+-->
+
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const  vm = new Vue({
+        el:'#root',
+        data:{
+            first_name:'张',
+            family_name:'三',
+            fullName:'张-三'
+        },
+        watch:{
+            first_name(newValue){
+                //这里为什么要写成箭头函数？
+                //因为写了箭头函数之后，里面没有this，所以会往外面找this，就找到了handler函数
+                //如果不写箭头函数，那么定时器指向的就是window
+                setTimeout(()=>{
+                    this.fullName = newValue + '-' + this.family_name
+                },1000)
+            },
+            family_name(newValue){
+                setTimeout(()=>{
+                    this.fullName = this.first_name + '-' + newValue
+                },1000)
+            }
+
+        }
+    })
+</script>
+</body>
+</html>

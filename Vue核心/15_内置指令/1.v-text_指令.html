@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<!--
+    v-text指令：
+    向其所在节点中渲染文本内容
+    与插值语法的区别，v-text会替换掉节点中的内容， {{ xxx }}不会
+-->
+<body>
+    <div id="root">
+        <h2>{{name}}</h2>
+        <h2 v-text="name" ></h2>
+
+
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el:'#root',
+            data:{
+                name:'yjm',
+
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+    <style>
+        .basic{
+            border: 10px;
+        }
+        .happle{
+            background: red;
+        }
+        .sad{
+            background: blue;
+        }
+        .nomal{
+            background: goldenrod;
+
+        }
+        .test{
+            border-radius: 10px;
+
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+<!--    绑定class样式，字符串写法，适用于：样式的类名不确定，需要动态指定-->
+    <div class="basic" :class="mood">{{name}}</div>
+    <div class="basic" :class="syl">{{name}}</div>
+    <div class="basic" :class="Obj">{{name}}</div>
+    <div class="basic" :class="Obj" :style="styleObj">{{name}}</div>
+
+    <button @click="changemood" >change</button>
+</div>
+
+
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const  vm = new Vue({
+        el:'#root',
+        data:{
+            name:'yjm',
+            mood:'happle',
+            syl:['sad','test'],
+            Obj:{
+                basic:true,
+                nomal:true,
+                test:true
+            },
+            styleObj:{
+                fontSize:'40px'
+            }
+        },
+        methods:{
+            changemood(){
+                const arr = ['sad','happle','nomal']
+                this.mood = arr[Math.floor(Math.random()*3)]
+            }
+        }
+    })
+</script>
+</body>
+</html>

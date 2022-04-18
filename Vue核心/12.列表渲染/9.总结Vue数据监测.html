@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<!--数据劫持：
+
+    大总结：
+    1、Vue 会监视data中所有层次的数据
+    2、如何监测对象中的数据？
+    通过Setter函数，且在new Vue时就传入要监测的数据
+    （1）对象中追加的属性，Vue默认不做响应式处理
+    （2）如要给添加的属性做响应式可以调用一下API
+    Vue.set(target,propertyName/Name,value)
+或者 Vue.$set(target,propertyName/Name,value)
+    3、如何监测数组中的数据？
+    通过包裹数据更新元素的方式实现，本质就是调用原生对应的方法对数据进行更新
+    重新解析模板，进而更新页面
+    4、在Vue修改数组一定要用一下方法
+    push(),pop(),unshift(),shift(),splice(),sort().reverse()
+    Vue.set() 或 Vue.$set()
+    !!!set不能给根数据对象（_data)添加属性!!!
+-->
+<div  id="root">
+    <button @click="student.age++">年龄+1</button><br/>
+    <button @click="addSex">添加性别+1</button><br/>
+    <button @click="student.sex = '女'">修改性别+1</button><br/>
+    <button @click="addFriends">在列表首位加一个朋友</button><br/>
+    <button @click="updateFirstFriendName">修改第一个朋友的名字是张三</button><br/>
+    <button @click="addHobbys">添加一个爱好</button><br/>
+    <button @click="updateFirstHobbys">修改第一个爱好为 开车</button><br/>
+
+    <h2>姓名{{student.name}}</h2>
+    <h2>年龄{{student.age}}</h2>
+    <h2>爱好{{student.hobby}}</h2>
+    <h2 v-if="student.sex">性别：{{student.sex}}</h2>
+    <ul>
+        <li v-for="(h,index) in student.hobby" :key = "index">
+            {{h}}
+        </li>
+    </ul>
+    <ul>
+        <li v-for="(f,index) in student.friends" :key = "index">
+            {{f.name}} - {{f.age}}
+        </li>
+    </ul>
+</div>
+<!--
+    1.加工data，
+-->
+<script type="text/javascript">
+
+    Vue.config.productionTip = false
+    const  vm = new Vue({
+        el:'#root',
+        data:{
+            student:{
+                name:"yjm",
+                age:15,
+                hobby:["打球","泡脚","跑步"],
+                friends:[
+                    {name:'1',age:20},
+                    {name:'2',age:30},
+                ]
+            }
+        },
+        methods:{
+            addSex(){
+                Vue.set(this.student,'sex',"男")
+            },
+            addFriends(){
+                this.student.friends.unshift({name:'3',age:20})
+            },
+            updateFirstFriendName(){
+                this.student.friends[0].name = "张三";
+            },
+            addHobbys(){
+                this.student.hobby.unshift("洗头")
+            },
+            updateFirstHobbys(){
+                Vue.set(this.student.hobby,0,"洗头")
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+
+</head>
+<body>
+    <script type = "text/javascript">
+        Vue.config.productionTip = false
+        let number = 20
+        let person = {
+        name:"张三",
+        sex:"男",
+    }
+    Object.defineProperty(person,'age',{
+        // value:'age',
+        // enumerable:true,//是否可以枚举
+        // writable:true,//是否可以被修改
+        // configurable:true,//是否可以被删除
+        //当有人访问person的age属性时，get会被调用，被调用的返回值就是age的值
+        get:function () {
+            return  number
+        },
+
+        set(value){
+            console.log("有人修改")
+            number = value
+        }
+
+    })
+    console.log(Object.keys(person))
+    console.log(person)
+    </script>
+</body>
+</html>

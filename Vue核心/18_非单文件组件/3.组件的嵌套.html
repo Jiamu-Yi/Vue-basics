@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<!--
+
+-->
+<body>
+<div id="root">
+
+</div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    //第一步创建school组件
+    const school = {
+        // el:'#root', // 不能写el
+        template:`
+            <div>
+                <h2>{{schoolName}}</h2>
+                <h2>{{address}}</h2>
+                <button @click="showName">点我提示学校名</button>
+            </div>
+        `,
+        data(){
+            return {
+                schoolName:"minda",
+                address:"wuhan",
+            }
+        },
+        methods:{
+            showName(){
+                alert("message");
+            }
+        },
+    }
+
+    //第一步创建student组件
+    const student = Vue.extend({
+        // el:'#root', // 不能写el
+        template:`
+            <div>
+                <h2>{{studentName}}</h2>
+                <h2>{{age}}</h2>
+            </div>
+        `,
+        data(){
+            return {
+                studentName:"yjm",
+                age:1,
+            }
+        },
+
+    })
+
+    //第一步创建student组件
+    const hello = Vue.extend({
+        // el:'#root', // 不能写el
+        template:`
+            <div>
+                <student></student>
+                <school></school>
+                <h2>{{Name}}</h2>
+            </div>
+        `,
+        data(){
+            return {
+                Name:"hello",
+            }
+        },
+        components:{
+            student:student,
+            school:school,
+        },
+    })
+
+    const app = Vue.extend({
+        // el:'#root', // 不能写el
+        template:`
+            <div>
+                <hello></hello>
+            </div>
+        `,
+        components:{
+            hello:hello,
+        },
+    })
+    // 第三步全局注册
+    const vm = new Vue({
+        template:`
+            <div>
+                <app></app>
+            </div>
+        `,
+        el:'#root',
+        //第二部注册组件
+        components:{
+            app:app,
+        },
+    })
+</script>
+</body>
+</html>

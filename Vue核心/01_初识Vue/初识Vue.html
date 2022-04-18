@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <!--
+        初识Vue，想要vue工作，需要创建一个实例，并传入一个配置对象
+        root
+    -->
+    <div id="root">
+        <h1>hello {{name}} , {{age}}</h1>
+        <h1>hello {{name}} , {{age}}</h1>
+
+    </div>
+    <script type = "text/javascript">
+        Vue.config.productionTip = false
+
+    //    创建Vue实例
+        new Vue({
+            el:'#root' ,//el用于指定当前Vue实例为哪个容器服务，值通常为CSS选择器字符串、
+            data:{  //data 中存储数据，数据共el所指定的容器去使用
+                name:"yjm",
+                age:22,
+            }
+        })
+
+
+    </script>
+
+</body>
+</html>

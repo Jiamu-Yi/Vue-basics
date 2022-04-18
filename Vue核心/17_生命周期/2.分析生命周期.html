@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<!--
+    生命周期八个钩子：
+    将要创建 beforeCreate  这里创建的是数据代理，数据监测，并不是vm
+    创建完毕 created
+
+    将要挂载 beforeMount
+    挂载完毕 mounted （重要钩子）
+
+    将要更新 beforeUpdate
+    更新完毕 updated
+
+    将要销毁 beforeDestroy （重要钩子）
+    销毁完毕 destroyed
+-->
+<body>
+<div id="root">
+    <h2 >{{n}}</h2>
+    <button @click="add">asf</button>
+    <button @click="destroy">asf</button>
+
+</div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            n:1
+        },
+        methods:{
+            add(){
+                this.n++;
+            },
+            destroy(){
+                this.$destroy()
+            }
+        },
+        beforeCreate(){
+            console.log("beforeCreate");
+        },
+        created(){
+            console.log("created");
+        },
+        beforeMount(){
+            console.log("beforeMount");
+        },
+        mounted(){
+            console.log("mounted");
+        },
+        beforeUpdate(){
+            console.log("beforeUpdate");
+        },
+        updated(){
+            console.log("updated");
+        },
+        beforeDestroy(){
+            console.log("beforeDestroy");
+        },
+        destroyed(){
+            console.log("destroyed");
+        }
+
+    })
+    // setInterval(()=>{
+    //     vm.opacity -= 0.01;
+    //     if( vm.opacity <= 0){
+    //         vm.opacity = 1;
+    //     }
+    // },16)
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<!--
+关于组件名：
+    一个单词时：
+        首字母大学
+        全字母小写
+    多个字母时：
+        全字母小写并用-连接
+        单元首字母大写（仅限脚手架）
+
+关于组件标签
+    收尾通用
+    如果使用自闭和需要在脚手架环境下使用
+简写方式
+    const school = Vue.extend(options)
+    或
+    const school = options
+
+-->
+<body>
+<div id="root">
+<!--    第三部编写组件标签-->
+    <school></school>
+    <hr/>
+    <school></school>
+    <hello></hello>
+
+</div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    //第一步创建school组件
+    const school = {
+        name:'yjm',
+        // el:'#root', // 不能写el
+        template:`
+            <div>
+                <h2>{{schoolName}}</h2>
+                <h2>{{address}}</h2>
+                <button @click="showName">点我提示学校名</button>
+            </div>
+        `,
+        data(){
+            return {
+                schoolName:"minda",
+                address:"wuhan",
+            }
+        },
+        methods:{
+            showName(){
+                alert("message");
+            }
+        }
+    }
+
+    //第一步创建student组件
+    const student = Vue.extend({
+        // el:'#root', // 不能写el
+        template:`
+            <div>
+                <h2>{{studentName}}</h2>
+                <h2>{{age}}</h2>
+            </div>
+        `,
+        data(){
+            return {
+                studentName:"yjm",
+                age:1,
+            }
+        },
+    })
+
+    //第一步创建student组件
+    const hello = Vue.extend({
+        // el:'#root', // 不能写el
+        template:`
+            <div>
+                <h2>{{Name}}</h2>
+            </div>
+        `,
+        data(){
+            return {
+                Name:"hello",
+            }
+        },
+    })
+    // 第三步全局注册
+    Vue.component("hello",hello)
+    const vm = new Vue({
+        el:'#root',
+        //第二部注册组件
+        components:{
+            school:school,
+            student:student,
+        },
+    })
+</script>
+</body>
+</html>

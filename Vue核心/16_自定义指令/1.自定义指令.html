@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<!--
+    定义：
+    （1）局部指令：
+    new Vue({
+        directives:{指令名：配置对象}
+    })
+    或
+    new Vue({
+        directives:{指令名：回调函数}
+    })
+
+    配置对象中常见的3个回调
+    （1）bind 指令与元素成功绑定时调用
+    （2）insertedz指令所在元素被插入页面时调用
+    （3）update指令所在模板结构被重新解析时调用
+    备注：
+    指令定义时不加V-，但是使用时要加v-
+    指令名如果是多个单词，要使用kebab-case命名方式，不要用camelCase命名
+
+-->
+<body>
+<div id="root">
+    <h2>当前的n值是<span v-text="n"></span></h2>
+    <h2>放大10倍的n是<span v-big="n"></span></h2>
+    <button @click="n++">点我</button><br/>
+    <input type="text" v-fbind:value="n">
+
+</div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    new Vue({
+        el:'#root',
+        data:{
+            n:1,
+
+        },
+        directives:{
+            big(element,binding){
+                element.innerText = binding.value * 10;
+            },
+            fbind:{
+                //指令与元素成功绑定时（一上来）
+                bind(element,binding){
+                    element.value = binding.value
+                    console.log('bind')
+                },
+                //指令所在元素被插入
+                inserted(element,binding){
+                    element.focus()
+                },
+                //指令所在元素被更新
+                update(element,binding){
+                    element.value = binding.value
+                    element.focus()
+
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

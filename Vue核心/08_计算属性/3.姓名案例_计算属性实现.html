@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    姓：<input type="text" v-model="first_name">
+    </br>
+    名：<input type="text" v-model="family_name">
+    </br>
+    姓名：<span>{{fullName}}</span>
+</div>
+<!--    计算属性可以直接被读取
+        如果属性要被修改，需要写set函数，并且一定要修改计算属性数据的来源
+-->
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const  vm = new Vue({
+        el:'#root',
+        data:{
+            first_name:'张',
+            family_name:'三',
+        },
+        computed:{
+            fullName:{
+                //computed在执行一次之后会直接进缓存
+                //什么时候调用Get ，1.初次调用get时 2.所依赖的数据发生变化时
+                get(){
+                    return this.first_name + "-" + this.family_name;
+                },
+            //    Set什么时候调用：fullName被调用时
+                set(value){
+                    const arr = value.split('-');
+                    this.first_name = arr[0];
+                    this.family_name = arr[1];
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换</button>
+        <p>a是 {{numbers.a}}</p>
+        <button @click="numbers.a++">切换</button>
+        <p>b是 {{numbers.b}}</p>
+        <button @click="numbers.b++">切换</button>
+    </div>
+<!--        深度监视：
+            watch中只监视最表面的一层，默认无法监视遍历内部的对象
+            使用配置项deep：TRUE可以深入监视对象内部值改变
+-->
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            isHot:true,
+            numbers:{
+                a:1,
+                b:2,
+            }
+        },
+        computed:{
+            info(){
+                return this.isHot? '炎热':'凉爽';
+            }
+        },
+        methods:{
+            changeWeather(){
+                this.isHot = !this.isHot;
+            }
+        },
+        watch:{
+            isHot:{
+                // immediate:true,//初始化时让hander调用一下
+                //什么时候调用，isHot被修改时触发
+                handler(newValue,oldValue){
+                    console.log(newValue,oldValue)
+                }
+            },
+            numbers:{
+                //监视多级结构中的所以属性的变化
+                deep:true,
+                handler(newValue, oldValue) {
+                    console.log("hello")
+                }
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

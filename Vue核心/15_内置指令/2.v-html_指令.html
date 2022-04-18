@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<!--
+    注释中的文字会直接解析成HTML文件
+-->
+<body>
+    <div id="root">
+        <h2>{{name}}</h2>
+        <h2 v-html="" ></h2>
+
+
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+        new Vue({
+            el:'#root',
+            data:{
+                name:'yjm',
+
+            }
+        })
+    </script>
+</body>
+</html>

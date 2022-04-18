@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+
+</head>
+<body>
+<!--
+1、插值语法用于解析标签体内容
+{{xxx}} xxx是js表达式，且可以直接读取到data中的所以属性
+2、指令语法
+用于解析标签，包括标签属性，绑定事件等
+-->
+    <div id = "root">
+        <h1>插值语法</h1>
+        <h1>你好，{{name}}</h1>
+        <h1>标签语法</h1>
+        <a v-bind:href="url" x="hello">{{baidu}}</a>
+        <a :href="url" x="hello">apple</a>
+
+    </div>
+    <script type = "text/javascript">
+        Vue.config.productionTip = false
+
+        //    创建Vue实例
+        new Vue({
+            el:'#root' ,//el用于指定当前Vue实例为哪个容器服务，值通常为CSS选择器字符串、
+            data:{  //data 中存储数据，数据共el所指定的容器去使用
+                name:"yjm",
+                url:"http://www.baidu.com",
+                hello:"hello",
+                baidu:"yjm"
+            }
+        })
+
+
+    </script>
+</body>
+</html>

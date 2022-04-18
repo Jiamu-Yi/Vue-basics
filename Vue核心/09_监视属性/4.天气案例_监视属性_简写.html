@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换</button>
+    </div>
+<!--
+    如果不需要配置项，即配置项只含有handler时，可以触发简写模式
+-->
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            isHot:true,
+        },
+        computed:{
+            info(){
+                return this.isHot? '炎热':'凉爽';
+            }
+        },
+        methods:{
+            changeWeather(){
+                this.isHot = !this.isHot;
+            }
+        },
+        //正常写
+        // watch:{
+        //     isHot:function (newValue,oldValue) {
+        //         console.log(this.newValue,this.oldValue)
+        //     }
+        // }
+
+    })
+    vm.$watch('isHot',function (newValue,oldValue) {
+        console.log(newValue,oldValue)
+    })
+</script>
+
+</body>
+</html>

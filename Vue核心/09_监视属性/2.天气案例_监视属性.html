@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换</button>
+    </div>
+<!--    当监视的属性发生改变时，watch中的函数发生改变
+        监视的两种写法：
+        1.new Vue时就写入
+        2.通过vm.$watch 添加监视
+-->
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            isHot:true
+        },
+        computed:{
+            info(){
+                return this.isHot? '炎热':'凉爽';
+            }
+        },
+        methods:{
+            changeWeather(){
+                this.isHot = !this.isHot;
+            }
+        },
+        // watch:{
+        //     isHot:{
+        //         immediate:true,//初始化时让hander调用一下
+        //         //什么时候调用，isHot被修改时触发
+        //         handler(newValue,oldValue){
+        //             console.log(newValue,oldValue)
+        //         }
+        //     }
+        // }
+
+    })
+    //这里等价于上面的watch
+    vm.$watch('isHot',{
+        immediate:true,//初始化时让hander调用一下
+        //什么时候调用，isHot被修改时触发
+        handler(newValue,oldValue){
+            console.log(newValue,oldValue)
+        }
+    })
+</script>
+
+</body>
+</html>

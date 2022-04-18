@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+<!--    常用的别名
+    回车 enter
+    删除 delete
+    退出 esc
+    空格 space
+    换行 tab （必须配合Keydown使用）
+    上 up
+    下 down
+    左 left
+    右 right
+
+    未提供别名的案件，用原始的key值去绑定 要转为kebab-case
+
+    系统修饰键：ctrl alt shift win 等
+    1.配合keyup使用，按下修饰键的同时，再按下其他键，随后释放其他键，事件才会触发
+    2.配合keydown使用，正常触发事件
+
+
+-->
+    <input type="text" placeholder="按下回车提示输入" @keydown.ctrl="shouInfo2">
+
+</div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#root',
+        data:{
+
+        },
+        methods:{
+            shouInfo1(number1,number2,event){
+                alert(number1)
+                alert(number2)
+
+                console.log(event)
+            },
+            shouInfo2(event){
+                alert('hello2')
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

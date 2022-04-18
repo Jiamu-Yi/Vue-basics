@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+
+    <h2>hello</h2>
+    <button @click="shouInfo1(66 ,80, $event)">点击显示信息</button>
+    <a href="www.baidu.com" @click.prevent="shouInfo2">点击显示信息</a>
+
+</div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    new Vue({
+        el:'#root',
+        data:{
+
+        },
+        methods:{
+            shouInfo1(number1,number2,event){
+                alert(number1)
+                alert(number2)
+
+                console.log(event)
+            },
+            shouInfo2(event){
+                alert('hello2')
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

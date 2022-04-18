@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<!--
+    常用的生命钩子：
+    1.mounted：发送Ajax请求，启动定时器，绑定自定义事件，订阅消息等初始化操作
+    2.beforeDestroy：清除定时器，绑定自定义事件，取消订阅消息等收尾工作
+
+    关于销毁Vue实例
+    销毁后自定义事件会失效，但是原生DOM有效
+    一半不会在beforeDestroy操作数据
+
+-->
+<body>
+<div id="root">
+    <h2 :style="{opacity}">yjm</h2>
+    <button @click="stop">hhhh</button>
+</div>
+<script type="text/javascript">
+    Vue.config.productionTip = false
+    const vm = new Vue({
+        el:'#root',
+        data:{
+            opacity:1
+        },
+        methods:{
+            stop(){
+                // clearInterval(this.timer)
+                this.$destroy()
+            }
+        },
+        mounted(){
+            this.timer = setInterval(()=>{
+                vm.opacity -= 0.01;
+                if( vm.opacity <= 0){
+                    vm.opacity = 1;
+                }
+            },16)
+        },
+        beforeMount(){
+            clearInterval(this.timer)
+        },
+    })
+</script>
+</body>
+</html>

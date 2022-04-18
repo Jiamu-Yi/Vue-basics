@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        单项数据绑定：<input type="text " v-bind:value="name">
+        <br/>
+        双向数据绑定：<input type="text " v-model:value="name">
+
+<!--    v-model 智能应用在表单类元素内，v-model:value可以简写为v-model，因为其默认收集的值就是value
+-->
+    </div>
+<script type = "text/javascript">
+    Vue.config.productionTip = false
+
+    //    创建Vue实例
+    new Vue({
+        el:'#root' ,//el用于指定当前Vue实例为哪个容器服务，值通常为CSS选择器字符串、
+        data:{  //data 中存储数据，数据共el所指定的容器去使用
+            name:"yjm",
+            age:22,
+        }
+    })
+
+
+</script>
+</body>
+</html>

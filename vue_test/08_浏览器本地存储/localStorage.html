@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button onclick="saveData()">点我保存数据</button>
+    <button onclick="readData()">点我查看数据</button>
+    <button onclick="deleteData()">点我删除数据</button>
+    <button onclick="deleteAllData()">点我情况删除数据</button>
+
+<script type="text/javascript">
+    function saveData() {
+        localStorage.setItem('msg','hello')
+    }
+    function readData() {
+        console.log(localStorage.getItem('msg'))
+    }
+    function deleteData() {
+        localStorage.removeItem('msg')
+    }
+    function deleteAllData() {
+        localStorage.clear()
+    }
+</script>
+</body>
+</html>
